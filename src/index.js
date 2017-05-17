@@ -1,11 +1,16 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import App from './components/app.js';
-import { Router, Route, hashHistory } from 'react-router';
+import { BrowserRouter, Route } from 'react-router-dom';
+import App from './components/app.js'
+import Login from './components/login.js';
 
-ReactDOM.render(
-    <Router history={hashHistory}>
-        <Route path="/" component={App} />
-    </Router>,
-    document.getElementById('app')
+ReactDOM.render((
+     <BrowserRouter>
+        <div>
+          <Route path="/" component={App}/>
+          <Route path="/login" compenent={Login}/>
+        </div>
+     </BrowserRouter>
+     ),
+     document.getElementById('app')
 );

@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import RFSObjectDiv from './rfsobjectdiv'
 
-export default class App extends Component {
+export default class Login extends Component {
     constructor(props) {
         super(props)
     }
     render() {
         return (
             <div>
-            <RFSObjectDiv/>
+            Hej hej ja detta va login
             </div>
         )
     }
