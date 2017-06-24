@@ -4,12 +4,20 @@ import { PageHeader } from 'react-bootstrap';
 import ToggleDisplay from 'react-toggle-display';
 import {Collapse} from 'react-collapse';
 
+const collapseDiv = {
+  "display": "flex"
+}
+
+const test = {
+  "display": "flex",
+  "flexDirection": "column"
+}
 
 const backgroundStyle = {
     "backgroundColor": "white",
     "position": "absolute",
-    "width": "100%",
-    "height": "100%",
+    "width": "25%",
+    "height": "25%",
     "zindex":1,
 }
 
@@ -19,6 +27,7 @@ const arrayStyle = {
    "width": "95%",
    "border": "1px solid black",
    "padding": "5px",
+
 }
 
 const objectStyle = {  
@@ -28,7 +37,8 @@ const objectStyle = {
     "border": "1px solid black",
     "width": "99%",
     "color": "black",
-
+    "height": "100%",
+    "flexDirection": "row"
     
 }
 
@@ -36,64 +46,71 @@ export default class RFSObjectDiv extends Component {
   constructor(props) {
     super(props)
     this.state = {
-        rfsArray: [
-            {consultant: "Morgan Ottosson",
-            id: 1,
-            ritm: "RITM45489534",
-            status: "Finalized",
-            category: "Early Termination",
-            division: "SSF",
-            wpteam: "Yes"
-            },
-            {consultant:"Mattias Jönsson",
-            id:2,
-            ritm: "RITM45489534",
-            status: "Finalized",
-            category: "Early Termination",
-            division: "SSF",
-            wpteam: "Yes"
-            }
-        ],
-        collapse: false
-
+        collapse: false,
+        players: [],
+        teamOne: [],
+        teamTwo: []
     }
-
-    this.toggle = this.toggle.bind(this);
   }
 
-  toggle() {
-    this.setState({ collapse: !this.state.collapse});
+  fetchPlayers() {
+    fetch(`/players`)
+    .then(response => response.json())
+    .then(response => {
+      console.log(response)
+      this.state.players = response[0]
+      console.log(this.state.players)
+      this.state.teamOne = response[1]
+      console.log(this.state.teamOne)
+      this.state.teamTwo = response[2]
+      console.log(this.state.teamTwo)
+      this.forceUpdate();
+    })
+  }
+
+  componentDidMount() {
+    this.fetchPlayers();
   }
 
   render() {
     return (
       <div style={backgroundStyle}>
- 
-        <div className="rfsArray" style={arrayStyle}>{this.state.rfsArray.map((rfsObject) => {
-            return <div className='rfsObject' key={rfsObject.id} style={objectStyle}>
-                <Button color="primary" onClick={this.toggle} style={{ "border": "1px solid black", "backgroundColor": "white", "padding": "5px", "marginLeft": "1%", "width":"10%", "height":"5%" }}>Toggle</Button>
-                <div style = {{"border": "1px solid black", "backgroundColor": "white", "padding": "5px", "marginLeft": "1%", "width":"10%", "height":"5%"}}>
-                {rfsObject.ritm}
+        Lag 1
+        <div style = {test}>
+          <div className="players" style={arrayStyle}>{this.state.teamOne.map((player, i) => {
+              return <div style = {test}>
+              <div className='player' key={i} style={objectStyle}>
+                  <div style = {{"border": "1px solid black", "backgroundColor": "white", "padding": "5px", "marginLeft": "1%", "width":"100%", "height":"100%"}}>
+                  {player.player}
+                  </div>
+              </div>
+              </div>
+          })}
+          </div>
+          Lag 2
+          <div className="players" style={arrayStyle}>{this.state.teamTwo.map((player, i) => {
+              return <div style = {test}>
+              <div className='player' key={i} style={objectStyle}>
+                  <div style = {{"border": "1px solid black", "backgroundColor": "white", "padding": "5px", "marginLeft": "1%", "width":"100%", "height":"100%"}}>
+                  {player.player}
+                  </div>
+              </div>
+              </div>
+          })}
+          </div>
+        </div>
+        Spelare
+        <div className="players" style={arrayStyle}>{this.state.players.map((player, i) => {
+            return <div style = {test}>
+            <div className='player' key={i} style={objectStyle}>
+                <div style = {{"border": "1px solid black", "backgroundColor": "white", "padding": "5px", "marginLeft": "1%", "width":"100%", "height":"100%"}}>
+                {player.player}
                 </div>
-                <div style = {{"border": "1px solid black", "backgroundColor": "white", "padding": "5px", "marginLeft": "1%", "width":"15%", "height":"5%"}}>
-                {rfsObject.consultant}
+                <div style = {{"border": "1px solid black", "backgroundColor": "white", "padding": "5px", "marginLeft": "1%", "width":"100%", "height":"100%"}}>
+                {player.rating}
                 </div>
-                <div style = {{"border": "1px solid black", "backgroundColor": "white", "padding": "5px", "marginLeft": "1%", "width":"10%", "height":"5%"}}>
-                {rfsObject.category}
-                </div>
-                <div style = {{"border": "1px solid black", "backgroundColor": "white", "padding": "5px", "marginLeft": "1%", "width":"10%", "height":"5%"}}>
-                {rfsObject.status}
-                </div>
-                <Collapse isOpened={this.state.collapse}>
-                 <div style = {{"border": "1px solid black", "backgroundColor": "white", "padding": "5px", "marginLeft": "1%", "width":"10%", "height":"5%"}}>
-                 {rfsObject.division}
-                 </div>
-                 <div style = {{"border": "1px solid black", "backgroundColor": "white", "padding": "5px", "marginLeft": "1%", "width":"10%", "height":"5%"}}>
-                 {rfsObject.wpteam}
-                 </div>
-                </Collapse>
             </div>
-            
+            </div>
         })}
         </div>
       </div>
