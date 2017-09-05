@@ -7,7 +7,7 @@ export default class Login extends Component {
     render() {
         return (
             <div>
-            Hej hej ja detta va login
+            Hej hj ja detta va login
             </div>
         )
     }
