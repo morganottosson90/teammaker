@@ -25,7 +25,7 @@ let teamTwo = [];
 
 
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname,"../public")));
+app.use(express.static(path.join(__dirname,"./public")));
 app.listen(port,function(){
     console.log("Started listening on port", port)
 });
