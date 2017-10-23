@@ -4,7 +4,7 @@ let app = express();
 let bodyParser = require('body-parser');
 let shuffle = require('shuffle-array')
 
-let DEFAULT_PORT = 8080;
+let DEFAULT_PORT = 1337;
 let port = DEFAULT_PORT;
 
 
