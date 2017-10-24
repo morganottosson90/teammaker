@@ -58,7 +58,6 @@ typings/
 .env
 
 node_modules
-bundle.js
 npm-debug.log
 .secrets
 VCAP_SERVICES.json
