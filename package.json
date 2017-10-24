@@ -2,11 +2,11 @@
   "name": "teammaker",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "test.js",
   "scripts": {
     "start": "nodemon ./server/server.js",
-    "build:watch": "watchify src/index.js -o public/bundle.js -t [ babelify --presets [ es2015 react ] ]",
-    "build": "browserify src/index.js -o public/bundle.js -t [ babelify --presets [ es2015 react ] ]",
+    "build:watch": "watchify src/test.js -o public/bundle.js -t [ babelify --presets [ es2015 react ] ]",
+    "build": "browserify src/test.js -o public/bundle.js -t [ babelify --presets [ es2015 react ] ]",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
