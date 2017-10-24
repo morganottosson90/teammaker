@@ -29,6 +29,8 @@ exports.default = function (instance, Constructor) {
 
 exports.__esModule = true;
 
+//test
+
 var _assign = require("../core-js/object/assign");
 
 var _assign2 = _interopRequireDefault(_assign);
